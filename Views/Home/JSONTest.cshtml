@@ -5,7 +5,18 @@
 }
 
 <h1>Json 練習</h1>
-<ul id="ul1"></ul>
+<table id="table1" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>年資</th>
+            <th>薪水</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+    </tbody>
+</table>
 
 @section Styles{
     <style>
@@ -58,7 +69,7 @@
                 { "name": "Mary", "workYears": 7, "salary": 45000 }
             ]
         };
-        const myUl = document.querySelector('#ul1');
+        const tb = document.querySelector('#table1>tbody');
 
         // for(let i=0,max=emp.employees.length;i<max;i++){
         //    console.log(emp.employees[i].name);
@@ -94,8 +105,19 @@
 
             //  })
 
-        const emps = emp.employees.map(emp => `<li>${emp.name}</li>` )
-        myUl.innerHTML = emps.join("");
+        const emps = emp.employees.map(employee =>{
+            //解構賦值
+            const { name, workYears, salary } = employee;  //{ "name": "Tom", "workYears": 3, "salary": 35000 }
+            return(
+                ` <tr>
+                          <td>${name}</td>
+                          <td>${workYears}</td>
+                          <td>${salary}</td>
+                          </tr>                
+                `
+            )
+        } )
+        tb.innerHTML = emps.join("");
 
       //console.log();
     </script>
