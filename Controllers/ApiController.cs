@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MSIT158Site.Models;
+using Newtonsoft.Json;
 
 namespace MSIT158Site.Controllers
 {
@@ -23,5 +24,20 @@ namespace MSIT158Site.Controllers
             var cities = _context.Addresses.Select(a => a.City).Distinct();
             return Json(cities);
         }
+        public IActionResult Avatar(int id =1)
+        {
+            Member? member = _context.Members.Find(id);
+            if(member != null)
+            {
+                byte[] img = member.FileData;
+                if(img != null)
+                {
+                    return File(img, "image/jpeg");
+                }
+
+            }
+            return NotFound();
+        }
+        
     }
 }
