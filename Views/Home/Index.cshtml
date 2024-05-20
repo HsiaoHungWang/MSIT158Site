@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section Styles{
+    <style>
+    /*    h1 {
+            background-color: lightgreen;
+        }*/
+    </style>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@section Scripts{
+    <script>
+        //step1
+      //  const myH = document.querySelector('h1.display-4');  //css selectors
+
+        //step2 滑鼠移上去 > 事件 > mouseover
+        //myH.addEventListener('mouseover', (evt) => {
+        //    evt.target.style.backgroundColor = 'cyan';
+        //    console.log(this);
+        //})
+        //myH.addEventListener('mouseover', function(){
+        // //   evt.target.style.backgroundColor = 'cyan';
+        //    console.log(this);
+        //})
+
+        //setTimeout(()=>{
+        //    console.log("A")
+        //    setTimeout(() => {
+        //        console.log("B")
+        //        setTimeout(() => {
+        //            console.log("C")
+        //        }, 1000)
+        //    }, 1000)
+        //}, 1000)
+      
+  //等1秒印出A，再等1秒印出B、再等1秒印出C
+
+  function printSomething(data){
+      const promise =  new Promise((resolve,reject)=>{
+               setTimeout(() => {
+                           resolve(data)
+                  }, 1000)
+      })    
+      return promise
+  }
+
+        //printSomething("A")
+        //  .then((data)=>{
+        //      console.log(data)
+        //      return printSomething("B")
+        //  })
+        //  .then((data)=>{
+        //        console.log(data)
+        //        return printSomething("C")
+        //    })
+        //    .then((data) => {
+        //        console.log(data)                   
+        //    })
+
+            //循序非同步 ES7 async await 寫起來就像是同步語法
+            //IIFE
+            (async ()=>{
+                let data = await printSomething("A")
+                console.log(data)
+                data = await printSomething("B")
+                console.log(data)
+                data = await printSomething("C")
+                console.log(data)
+            })();
+
+            //ajax => 非同步
+
+         
+       
+
+
+
+        //promise 物件的建立
+  //const promise = new Promise((resolve, reject)=>{
+  //    //非同步程式碼
+  //    if(true){
+  //         resolve("成功")
+  //    }else{
+  //        reject("錯誤")
+  //    }        
+  //})
+
+  //     // promise物件的使用
+  //     promise
+  //     .then((data)=>{
+  //         console.log(data)
+  //     })
+  //     .catch((err)=>{
+  //         console.log(err)
+  //     })
+  //     .finally(()=>{
+  //         console.log("end")
+  //     })
+
+ 
+    </script>
+}
