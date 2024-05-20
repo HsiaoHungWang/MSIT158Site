@@ -5,6 +5,7 @@
 }
 
 <h1>Json 練習</h1>
+<ul id="ul1"></ul>
 
 @section Styles{
     <style>
@@ -31,6 +32,7 @@
             { "id": 2, "name": "Mary", "email": "Mary@gmail.com", "phone": ["02-11112222", "0911222333"] },
             { "id": 3, "name": "Tom", "email": "Tom@gmail.com" ,"phone":["02-11112222","0911222333"]}
     ]
+    
 
     //datas => array
     //datas[2] => { "id": 3, "name": "Tom", "email": "Tom@gmail.com" } object
@@ -56,8 +58,45 @@
                 { "name": "Mary", "workYears": 7, "salary": 45000 }
             ]
         };
+        const myUl = document.querySelector('#ul1');
+
+        // for(let i=0,max=emp.employees.length;i<max;i++){
+        //    console.log(emp.employees[i].name);
+        //    console.log(emp.employees[i].workYears);
+        //    console.log(emp.employees[i].salary);                 
+        //}
+
+        //for..in  for...of  array.foreach()
+        //emp.employees.forEach((emp,idx,arr)=>{
+        //    //console.log(idx) //0、1、2
+        //    //console.log(arr) //[{},{},{}]
+        //    console.log(emp.name)
+        //})
+            //      emp.employees.forEach(emp=>{
+            //console.log(emp.name)
+            //    })
+
+            /// emp.employees.forEach(emp=>{
+                    //console.log(emp.name)
+
+            //        //DOM
+            //        //<li>name</li>
+            //        //建立 li 標籤
+            //        const eleLi = document.createElement("li");  //<li></li>
+            //        //建立name => 文字節點
+            //        const txtLi = document.createTextNode(emp.name); //Jack
+            //        //把文字節點加到元素節點中
+            //eleLi.appendChild(txtLi); //<li>Jack</li>
 
 
+            //myUl.appendChild(eleLi);//<ul><li>Jack</li>
 
+
+            //  })
+
+        const emps = emp.employees.map(emp => `<li>${emp.name}</li>` )
+        myUl.innerHTML = emps.join("");
+
+      //console.log();
     </script>
 }
