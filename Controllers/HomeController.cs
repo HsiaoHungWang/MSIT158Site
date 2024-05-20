@@ -17,7 +17,7 @@ namespace MSIT158Site.Controllers
         {
             return View();
         }
-        public IActionResult About()
+        public IActionResult JSONTest()
         {
             return View();
         }

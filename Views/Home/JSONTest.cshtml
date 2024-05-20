@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewData["Title"] = "About";
+
+}
+
+<h1>Json 練習</h1>
+
+@section Styles{
+    <style>
+
+
+    </style>
+}
+@section Scripts{
+    <script>
+      //JSON格式 [ 陣列 ] { 物件 }
+
+     // const emp = {"id":1,"name":"Jack","email":"Jack@gmail.com"}
+      //物件.屬性
+      //  console.log(emp.id); //1
+        ////物件["屬性"]
+        //console.log(emp["name"]); //Jack
+        //const aMail = "email"
+        //console.log(emp[aMail]); //Jack@gmail.com
+
+    //const datas = ["a","b","c"]
+    //console.log(datas[0])  //a
+    const datas = [
+            { "id": 1, "name": "Jack", "email": "Jack@gmail.com", "phone": ["02-11112222", "0911222333"] },
+            { "id": 2, "name": "Mary", "email": "Mary@gmail.com", "phone": ["02-11112222", "0911222333"] },
+            { "id": 3, "name": "Tom", "email": "Tom@gmail.com" ,"phone":["02-11112222","0911222333"]}
+    ]
+
+    //datas => array
+    //datas[2] => { "id": 3, "name": "Tom", "email": "Tom@gmail.com" } object
+            //datas[2].email => Tom@gmail.com
+                    //datas[2].phone => ["02-11112222","0911222333"] array
+                    //datas[2].phone[1] =>0911222333
+//console.log(datas[2].email);
+//        console.log(datas[2].phone[1]);
+//for( ; ; )
+//for(let i=0,max=datas.length;i<max;i++){
+//            console.log(datas[i].id);
+//            console.log(datas[i].name);
+//            console.log(datas[i].email);
+//            console.log(datas[i].phone[0]);
+//            console.log(datas[i].phone[1]);
+//}
+
+
+        const emp = {
+            "employees": [
+                { "name": "Tom", "workYears": 3, "salary": 35000 },
+                { "name": "Jack", "workYears": 5, "salary": 40000 },
+                { "name": "Mary", "workYears": 7, "salary": 45000 }
+            ]
+        };
+
+
+
+    </script>
+}
