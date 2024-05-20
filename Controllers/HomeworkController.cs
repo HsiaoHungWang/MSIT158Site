@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MSIT158Site.Models;
 
 namespace MSIT158Site.Controllers
 {
-    public class ProductsController : Controller
+    public class HomeworkController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Homework1()
         {
-           
             return View();
         }
     }

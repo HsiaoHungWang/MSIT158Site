@@ -7,15 +7,17 @@ namespace MSIT158Site.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly MyDBContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MyDBContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
-        {
-            return View();
+        {          
+            return View(_context.Categories);
         }
         public IActionResult JSONTest()
         {

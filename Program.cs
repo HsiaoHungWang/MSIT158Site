@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using MSIT158Site.Models;
+
 namespace MSIT158Site
 {
     public class Program
@@ -8,6 +11,8 @@ namespace MSIT158Site
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<MyDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MyDBConnection")));
 
             var app = builder.Build();
 
