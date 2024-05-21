@@ -24,9 +24,7 @@
         (async ()=>{            
               const response = await fetch('@Url.Content("~/api/cities")');
                const datas = await response.json();
-              const cities = datas.map((city)=>{
-               return `<option value="${city}">${city}</option>` ;
-           })
+              const cities = datas.map(city => `<option value="${city}">${city}</option>` );
             selCity.innerHTML = cities.join("");          
         })();
     
