@@ -39,6 +39,14 @@ namespace MSIT158Site.Controllers
             }
             return NotFound();
         }
-        
+
+        public IActionResult Register(int id, string name, int age = 20)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                name = "guest";
+            }
+            return Content($"{id}  -  {name} 好!! 你 {age} 歲了", "text/html", System.Text.Encoding.UTF8);
+        }
     }
 }
