@@ -20,6 +20,7 @@
 @section Scripts{
     <script>
         const selCity = document.querySelector('#selectCity');
+     
         //ajax
         (async ()=>{            
               const response = await fetch('@Url.Content("~/api/cities")');
@@ -27,6 +28,16 @@
               const cities = datas.map(city => `<option value="${city}">${city}</option>` );
             selCity.innerHTML = cities.join("");          
         })();
+
+        //載入鄉鎮區
+        const loadDistricts = ()=>{
+            //console.log(selCity.value);
+            console.log(selCity.selectedIndex);
+            console.log(selCity.options[selCity.selectedIndex].value);
+            console.log(selCity.options[selCity.selectedIndex].text);
+        }
+
+        selCity.addEventListener('change', loadDistricts);
     
       
     </script>
