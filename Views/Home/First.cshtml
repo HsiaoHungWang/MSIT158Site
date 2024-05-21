@@ -5,16 +5,23 @@
 
 <h1>First Ajax Demo</h1>
 
-<button id="buttonStart" class="btn btn-primary" >Ajax 開始</button>
+<button id="buttonStart" class="btn btn-primary">Ajax 開始</button>
+<button id="buttonStop" class="btn btn-warning">Ajax 停止</button>
 <img src="~/images/Plant.gif" id="img1" style="display:none" />
 <div id="div1"></div>
 
 @section Scripts {
     <script>
         const btn = document.querySelector('#buttonStart');
+        const btnStop = document.querySelector('#buttonStop');
         const myDiv = document.querySelector('#div1');
         const imgLoading = document.querySelector('#img1');
-
+        let abortController;
+        btnStop.addEventListener('click', () => {
+            if(abortController){
+                    abortController.abort();
+            }
+        })
 
         btn.addEventListener('click', async () => {
            
@@ -22,8 +29,16 @@
                 imgLoading.style.display = "inline" //顯示執行的圖片
                 btn.setAttribute('disabled','disabled'); //讓按鈕不能使用
 
+                //取消ajax程式的執行
+                 abortController = new AbortController();
+                const signal = abortController.signal;
+
+                setTimeout(()=>{
+                    abortController.abort();
+                },5000);
+
                 //ajax 程式
-                const response = await fetch('@Url.Content("~/api/index")');
+                const response = await fetch('@Url.Content("~/api/index")',{signal});
                 const data = await response.text();
                 if(!response.ok) throw new Error(`錯誤代碼：${response.status}`);
                 myDiv.innerHTML = `<h2>${data}</h2>`;

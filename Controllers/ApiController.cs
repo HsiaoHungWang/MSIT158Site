@@ -16,7 +16,7 @@ namespace MSIT158Site.Controllers
 
         public IActionResult Index()
         {
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(10000);
             return Content("世界, 您好!!","text/html", System.Text.Encoding.UTF8);
         }
 
