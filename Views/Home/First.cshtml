@@ -43,7 +43,11 @@
                 if(!response.ok) throw new Error(`錯誤代碼：${response.status}`);
                 myDiv.innerHTML = `<h2>${data}</h2>`;
             }catch(error){
-                myDiv.innerHTML = `<h2>${error.message}</h2>`;
+                let errorMessage = error.message
+                if (error.name === 'AbortError'){
+                    errorMessage = "請稍後再來"
+                }
+                myDiv.innerHTML = `<h2>${errorMessage}</h2>`;
             }finally{
                 imgLoading.style.display = "none" //隱藏執行的圖片
                 btn.removeAttribute('disabled'); //讓按鈕可以按
