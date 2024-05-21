@@ -5,18 +5,24 @@
 
 <h1>First Ajax Demo</h1>
 
-<button id="buttonStart" class="btn btn-primary">Ajax 開始</button>
+<button id="buttonStart" class="btn btn-primary" >Ajax 開始</button>
+<img src="~/images/Plant.gif" id="img1" style="display:none" />
 <div id="div1"></div>
 
 @section Scripts {
     <script>
         const btn = document.querySelector('#buttonStart');
         const myDiv = document.querySelector('#div1');
+        const imgLoading = document.querySelector('#img1');
 
 
         btn.addEventListener('click', async () => {
-            //ajax 程式
+           
             try{
+                imgLoading.style.display = "inline" //顯示執行的圖片
+                btn.setAttribute('disabled','disabled'); //讓按鈕不能使用
+
+                //ajax 程式
                 const response = await fetch('@Url.Content("~/api/index")');
                 const data = await response.text();
                 if(!response.ok) throw new Error(`錯誤代碼：${response.status}`);
@@ -24,7 +30,8 @@
             }catch(error){
                 myDiv.innerHTML = `<h2>${error.message}</h2>`;
             }finally{
-
+                imgLoading.style.display = "none" //隱藏執行的圖片
+                btn.removeAttribute('disabled'); //讓按鈕可以按
             }
           
 
