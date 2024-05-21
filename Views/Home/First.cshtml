@@ -12,20 +12,24 @@
     <script>
         const btn = document.querySelector('#buttonStart');
         const myDiv = document.querySelector('#div1');
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', async () => {
            
             //ajax 程式
+            const response = await fetch('@Url.Content("~/api/index")');
+            const data = await response.text();
+            myDiv.innerHTML = `<h2>${data}</h2>`;
 
-          //console.log(fetch('@Url.Content("~/api/index")'));
 
-            fetch('@Url.Content("~/api/index")')
-                .then(response => {
-                    //console.log(response);
-                    return response.text();
-                })
-                .then(data => {                  
-                    myDiv.innerHTML = `<h2>${data}</h2>`;
-                })
+         // console.log(fetch('@Url.Content("~/api/index")'));
+
+            //fetch('@Url.Content("~/api/index")')
+            //    .then(response => {
+            //     //  console.log(response.text());
+            //      return response.text();
+            //    })
+            //    .then(data => {                  
+            //        myDiv.innerHTML = `<h2>${data}</h2>`;
+            //    })
            
         })
     </script>
