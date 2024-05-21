@@ -16,7 +16,7 @@ namespace MSIT158Site.Controllers
 
         public IActionResult Index()
         {
-            return Content("<h2>世界, 您好!!</h2>","text/html", System.Text.Encoding.UTF8);
+            return Content("世界, 您好!!","text/html", System.Text.Encoding.UTF8);
         }
 
         public IActionResult Cities()

@@ -19,6 +19,11 @@ namespace MSIT158Site.Controllers
         {          
             return View(_context.Categories);
         }
+
+        public IActionResult First()
+        {
+            return View();
+        }
         public IActionResult JSONTest()
         {
             return View();
