@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
+using Microsoft.Extensions.Hosting;
 using MSIT158Site.Models;
 using Newtonsoft.Json;
 
@@ -7,9 +9,12 @@ namespace MSIT158Site.Controllers
     public class ApiController : Controller
     {
      private readonly MyDBContext _context;
-        public ApiController(MyDBContext context)
+        private readonly IWebHostEnvironment _hostEnvironment;
+
+        public ApiController(MyDBContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            _hostEnvironment = hostEnvironment;
         }
 
 
@@ -73,7 +78,20 @@ namespace MSIT158Site.Controllers
             }
 
             //取得上傳檔案的資訊
-            string info = $"{avatar.FileName} - {avatar.Length} - {avatar.ContentType}";
+            //string info = $"{avatar.FileName} - {avatar.Length} - {avatar.ContentType}";
+            //string info = _hostEnvironment.ContentRootPath;
+
+            //檔案上傳
+            //實際路徑
+            //string uploadPath = @"C:\Users\User\Documents\workspace\MSIT158Site\wwwroot\uploads\a.png";
+            //WebRootPath：C: \Users\User\Documents\workspace\MSIT158Site\wwwroot
+            //ContentRootPath：C:\Users\User\Documents\workspace\MSIT158Site
+            string uploadPath = Path.Combine(_hostEnvironment.WebRootPath, "uploads", avatar.FileName);
+            string info = uploadPath;
+            using (var fileStream = new FileStream(uploadPath, FileMode.Create))
+            {
+                avatar.CopyTo(fileStream);
+            }
 
             return Content(info, "text/plain", System.Text.Encoding.UTF8);
             //寫進資料庫
