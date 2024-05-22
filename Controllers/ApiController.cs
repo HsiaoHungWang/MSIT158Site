@@ -114,11 +114,44 @@ namespace MSIT158Site.Controllers
             return Content(info, "text/plain", System.Text.Encoding.UTF8);
             // return Content($"Hello {member.Name}，{member.Age} 歲了，電子郵件是 {member.Email}", "text/html", System.Text.Encoding.UTF8);
         }
-   
-      public IActionResult Spots([FromBody] SearchDTO search)
-        {
 
-            return Json(search);
+        [HttpPost]
+      public IActionResult Spots([FromBody] SearchDTO searchDTO)
+        {
+            //根據分類編號搜尋景點資料
+            var spots = searchDTO.categoryId == 0 ? _context.SpotImagesSpots : _context.SpotImagesSpots.Where(s => s.CategoryId == searchDTO.categoryId);
+
+            //根據關鍵字搜尋景點資料(title、desc)
+            if (!string.IsNullOrEmpty(searchDTO.keyword))
+            {
+                spots = spots.Where(s => s.SpotTitle.Contains(searchDTO.keyword) || s.SpotDescription.Contains(searchDTO.keyword));
+            }
+
+
+
+
+            //總共有多少筆資料
+            int totalCount = spots.Count();
+            //每頁要顯示幾筆資料
+            int pageSize = searchDTO.pageSize;   //searchDTO.pageSize ?? 9;
+            //目前第幾頁
+            int page = searchDTO.page;
+
+            //計算總共有幾頁
+            int totalPages = (int)Math.Ceiling ((decimal)totalCount / pageSize);
+
+            //分頁
+            spots = spots.Skip((page-1)*pageSize).Take(pageSize);
+
+
+            //包裝要傳給client端的資料
+            SpotsPagingDTO spotsPaging = new SpotsPagingDTO();
+            spotsPaging.TotalCount = totalCount;
+            spotsPaging.TotalPages = totalPages;
+            spotsPaging.SpotsResult = spots.ToList();
+
+
+            return Json(spotsPaging);
         }
     
     }
