@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Spots";
+}
+
+<h1>台北市景點</h1>
+
+
+
+@section Styles{
+    <style>
+
+
+    </style>
+}
+@section Scripts{
+    <script>
+        const searchData = {
+            "categoryId":0,
+            "keyword":"北投"
+        };
+
+       (async ()=>{
+           const url = '@Url.Content("~/api/spots")';
+
+             const response = await fetch(url,{
+                 method:'POST',
+                 body:JSON.stringify(searchData),
+                 headers:{
+                     'Content-Type':'application/json'
+                 }
+             });
+             const datas = await response.json();
+             console.log(datas);
+
+       })();
+    </script>
+}

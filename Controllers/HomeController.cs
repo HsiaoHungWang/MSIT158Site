@@ -37,6 +37,12 @@ namespace MSIT158Site.Controllers
             return View();
         }
 
+
+        public IActionResult Spots()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

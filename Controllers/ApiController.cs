@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Hosting;
 using MSIT158Site.Models;
+using MSIT158Site.Models.DTO;
 using Newtonsoft.Json;
 
 namespace MSIT158Site.Controllers
@@ -113,5 +114,12 @@ namespace MSIT158Site.Controllers
             return Content(info, "text/plain", System.Text.Encoding.UTF8);
             // return Content($"Hello {member.Name}，{member.Age} 歲了，電子郵件是 {member.Email}", "text/html", System.Text.Encoding.UTF8);
         }
+   
+      public IActionResult Spots([FromBody] SearchDTO search)
+        {
+
+            return Json(search);
+        }
+    
     }
 }
