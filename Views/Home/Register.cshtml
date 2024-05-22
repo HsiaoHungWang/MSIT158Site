@@ -53,14 +53,20 @@
             //將資料放進FormData
             const myForm = document.querySelector('#userForm');
             const formData = new FormData(myForm);
+
             //formData.append("password", "12345678");
             //讀出formData中的資料
             //for(const pair of formData.entries()){
             //    console.log(`${pair[0]}:${pair[1]}`);
             //}
+           const url = '@Url.Content("~/api/register/")';
+            const response =  await fetch(url,{
+                method:'POST',
+                body:formData
+            });
 
-            //const response =  await fetch(url);
-
+            const data = await response.text();
+            divResult.textContent = data;
 
 
             //console.log(inpName.value);
