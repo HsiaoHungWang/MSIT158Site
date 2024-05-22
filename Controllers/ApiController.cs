@@ -127,6 +127,21 @@ namespace MSIT158Site.Controllers
                 spots = spots.Where(s => s.SpotTitle.Contains(searchDTO.keyword) || s.SpotDescription.Contains(searchDTO.keyword));
             }
 
+            //排序
+            switch (searchDTO.sortBy)
+            {
+                case "spotTitle":
+                    spots = searchDTO.sortType == "asc" ? spots.OrderBy(s => s.SpotTitle) :   spots.OrderByDescending(s => s.SpotTitle);
+                    break;
+                case "categoryId":
+                    spots = searchDTO.sortType == "asc" ? spots.OrderBy(s => s.CategoryId) :  spots.OrderByDescending(s => s.CategoryId);
+                    break;
+                default:
+                    spots = searchDTO.sortType == "asc" ? spots.OrderBy(s => s.SpotId) :   spots.OrderByDescending(s => s.SpotId);
+                    break;
+            }
+
+
 
 
 
