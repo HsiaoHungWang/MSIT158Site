@@ -65,13 +65,22 @@ namespace MSIT158Site.Controllers
         }
 
         //public IActionResult Register(string userName, string email, int age = 20)
-        public IActionResult Register(MemberDTO member)
+        public IActionResult Register(Member member, IFormFile avatar)
         {
-            if (string.IsNullOrEmpty(member.userName))
+            if (string.IsNullOrEmpty(member.Name))
             {
-                member.userName = "guest";
+                member.Name = "guest";
             }
-            return Content($"Hello {member.userName}，{member.Age} 歲了，電子郵件是 {member.Email}", "text/html", System.Text.Encoding.UTF8);
+
+            //取得上傳檔案的資訊
+            string info = $"{avatar.FileName} - {avatar.Length} - {avatar.ContentType}";
+
+            return Content(info, "text/plain", System.Text.Encoding.UTF8);
+            //寫進資料庫
+            //_context.Members.Add(member);
+            //_context.SaveChanges();
+
+            // return Content($"Hello {member.Name}，{member.Age} 歲了，電子郵件是 {member.Email}", "text/html", System.Text.Encoding.UTF8);
         }
     }
 }

@@ -11,7 +11,7 @@
         <form method="post" action="~/api/register"  id="userForm">
             <div class="mb-3">
                 <label for="InputName" class="form-label">姓名</label>
-                <input type="text" class="form-control" id="InputName" name="userName">
+                <input type="text" class="form-control" id="InputName" name="name">
            
             </div>
             <div class="mb-3">
@@ -21,6 +21,10 @@
             <div class="mb-3">
                 <label for="InputAge" class="form-label">年紀</label>
                 <input type="number" class="form-control" id="InputAge" name="age">
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">圖像</label>
+                <input class="form-control" type="file" id="formFile" name="avatar">
             </div>
          
             <button type="submit" class="btn btn-primary" id="buttonSubmit">送出</button>
