@@ -8,6 +8,9 @@
 </select>
 <select id="selectDistricts">
 </select>
+<select id="selectRoads">
+</select>
+<span id="spanAddress"></span>
 
 @section Styles{
     <style>
@@ -19,6 +22,8 @@
     <script>
         const selCity = document.querySelector('#selectCity');
         const selDistricts = document.querySelector('#selectDistricts');
+        const selRoads = document.querySelector('#selectRoads');
+        const spnAddress = document.querySelector('#spanAddress');
        //載入鄉鎮區
         const loadDistricts = async ()=>{
             //console.log();
@@ -38,10 +43,32 @@
 
             selDistricts.innerHTML = districts.join("");
 
-            
+
+            loadRoads();
 
 
+        }
+        //載入路名
+        const loadRoads = async () => {
 
+            const url = `@Url.Content("~/api/roads")?districts=${selDistricts.value}`;
+
+            const response = await fetch(url);
+            const datas = await response.json();
+
+            const roads = datas.map(road => `<option value="${road}">${road}</option>`);
+
+
+            selRoads.innerHTML = roads.join("");
+
+
+            loadAddress();
+
+
+        }
+
+        const loadAddress = () => {
+            spnAddress.textContent = `住址：${selDistricts.value}${selRoads.value}`;
         }
         //ajax
         (async ()=>{            
@@ -50,12 +77,13 @@
               const cities = datas.map(city => `<option value="${city}">${city}</option>` );
               selCity.innerHTML = cities.join("");
             loadDistricts();
+        
         })();
 
       
 
         selCity.addEventListener('change', loadDistricts);
-    
-      
+        selDistricts.addEventListener('change', loadRoads);
+        selRoads.addEventListener('change', loadAddress);
     </script>
 }
