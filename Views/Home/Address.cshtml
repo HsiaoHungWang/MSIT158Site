@@ -5,10 +5,8 @@
 
 <h1>Address</h1>
 <select id="selectCity">
-    <option value="a">Item1</option>
-    <option value="b">Item2</option>
-    <option value="c">Item3</option>
-    <option value="d">Item4</option>
+</select>
+<select id="selectDistricts">
 </select>
 
 @section Styles{
@@ -20,22 +18,41 @@
 @section Scripts{
     <script>
         const selCity = document.querySelector('#selectCity');
-     
+        const selDistricts = document.querySelector('#selectDistricts');
+       //載入鄉鎮區
+        const loadDistricts = async ()=>{
+            //console.log();
+            //console.log(selCity.selectedIndex);
+            //console.log(selCity.options[selCity.selectedIndex].value);
+            //console.log(selCity.options[selCity.selectedIndex].text);
+            //@Url.Content("~/api/districts")  => /api/districts
+          //  const url = '@Url.Content("~/api/districts")?city=' + selCity.value;
+            const url = `@Url.Content("~/api/districts")?city=${selCity.value}` ; 
+
+          //console.log(url);
+           const response = await fetch(url);
+           const datas = await response.json();
+
+           const districts = datas.map(district=> `<option value="${district}">${district}</option>`);
+
+
+            selDistricts.innerHTML = districts.join("");
+
+            
+
+
+
+        }
         //ajax
         (async ()=>{            
               const response = await fetch('@Url.Content("~/api/cities")');
                const datas = await response.json();
               const cities = datas.map(city => `<option value="${city}">${city}</option>` );
-            selCity.innerHTML = cities.join("");          
+              selCity.innerHTML = cities.join("");
+            loadDistricts();
         })();
 
-        //載入鄉鎮區
-        const loadDistricts = ()=>{
-            //console.log(selCity.value);
-            console.log(selCity.selectedIndex);
-            console.log(selCity.options[selCity.selectedIndex].value);
-            console.log(selCity.options[selCity.selectedIndex].text);
-        }
+      
 
         selCity.addEventListener('change', loadDistricts);
     

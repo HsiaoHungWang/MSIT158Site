@@ -20,11 +20,27 @@ namespace MSIT158Site.Controllers
             return Content("世界, 您好!!","text/html", System.Text.Encoding.UTF8);
         }
 
+        //讀出不會重複的城市名
         public IActionResult Cities()
         {
             var cities = _context.Addresses.Select(a => a.City).Distinct();
             return Json(cities);
         }
+
+        //根據城市名讀出不會重複的鄉鎮區
+        public IActionResult Districts(string city)
+        {          
+            var districts = _context.Addresses.Where(a=>a.City == city).Select(a => a.SiteId).Distinct();
+            return Json(districts);
+        }
+        //根據鄉鎮區讀出路名
+        public IActionResult Roads(string districts)
+        {
+            var roads = _context.Addresses.Where(a => a.SiteId == districts).Select(a => a.Road);
+            return Json(roads);
+        }
+
+
         public IActionResult Avatar(int id =1)
         {
             Member? member = _context.Members.Find(id);
