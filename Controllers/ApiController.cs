@@ -97,7 +97,7 @@ namespace MSIT158Site.Controllers
             }
 
             //檔案上傳轉成二進位
-            byte[] imgByte = null;
+            byte[]? imgByte = null;
             using(var memoryStream = new MemoryStream())
             {
                 avatar.CopyTo(memoryStream);
