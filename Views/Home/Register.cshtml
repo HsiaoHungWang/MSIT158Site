@@ -8,28 +8,29 @@
     <div class="col-3"></div>
     <div class="col-6">
         <h1>Register</h1>
-        <form>
+        <form method="post" action="~/api/register" >
             <div class="mb-3">
                 <label for="InputName" class="form-label">姓名</label>
-                <input type="text" class="form-control" id="InputName">
+                <input type="text" class="form-control" id="InputName" name="userName">
            
             </div>
             <div class="mb-3">
                 <label for="InputEmail" class="form-label">電子郵件</label>
-                <input type="email" class="form-control" id="InputEmail">
+                <input type="email" class="form-control" id="InputEmail" name="email">
             </div>
             <div class="mb-3">
                 <label for="InputAge" class="form-label">年紀</label>
-                <input type="number" class="form-control" id="InputAge">
+                <input type="number" class="form-control" id="InputAge" name="age">
             </div>
          
-            <button type="submit" class="btn btn-primary">送出</button>
+            <button type="submit" class="btn btn-primary" id="buttonSubmit">送出</button>
         </form>
+        <div id="div1" class="alert alert-info mt-3"></div>
 
     </div>
     <div class="col-3"></div>
 </div>
-<div id="div1"></div>
+
 @section Styles{
     <style>
 
@@ -38,7 +39,15 @@
 }
 @section Scripts{
     <script>
-      //  const divResult = document.querySelector('#div1');
+       const divResult = document.querySelector('#div1');
+        const btnSubmit = document.querySelector('#buttonSubmit');
+        const inpName = document.querySelector('#InputName');
+        const InpEmail = document.querySelector('#InputEmail');
+        const InpAge = document.querySelector('#InputAge');
+
+        btnSubmit.addEventListener('click',()=>{
+            console.log(inpName.value);
+        })
 
       //(async ()=>{
       //      const url = '@Url.Content("~/api/register")?id=1&age=29&name=Mary';

@@ -64,13 +64,14 @@ namespace MSIT158Site.Controllers
             return NotFound();
         }
 
-        public IActionResult Register(int id, string name, int age = 20)
+        //public IActionResult Register(string userName, string email, int age = 20)
+        public IActionResult Register(MemberDTO member)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(member.userName))
             {
-                name = "guest";
+                member.userName = "guest";
             }
-            return Content($"{id}  -  {name} 好!! 你 {age} 歲了", "text/html", System.Text.Encoding.UTF8);
+            return Content($"Hello {member.userName}，{member.Age} 歲了，電子郵件是 {member.Email}", "text/html", System.Text.Encoding.UTF8);
         }
     }
 }
