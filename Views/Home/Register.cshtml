@@ -42,11 +42,19 @@
        const divResult = document.querySelector('#div1');
         const btnSubmit = document.querySelector('#buttonSubmit');
         const inpName = document.querySelector('#InputName');
-        const InpEmail = document.querySelector('#InputEmail');
-        const InpAge = document.querySelector('#InputAge');
+        const inpEmail = document.querySelector('#InputEmail');
+        const inpAge = document.querySelector('#InputAge');
 
-        btnSubmit.addEventListener('click',()=>{
+        btnSubmit.addEventListener('click', async (evt)=>{
+            evt.preventDefault(); //防止預設行為的發生
+
             console.log(inpName.value);
+            const url = `@Url.Content("~/api/register/")?email=${inpEmail.value}&age=${inpAge.value}&name=${inpName.value}`;
+
+            const response =  await fetch(url);
+            const data = await response.text();
+            divResult.textContent = data;
+
         })
 
       //(async ()=>{
