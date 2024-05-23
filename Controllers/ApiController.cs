@@ -22,7 +22,7 @@ namespace MSIT158Site.Controllers
 
         public IActionResult Index()
         {
-            System.Threading.Thread.Sleep(10000);
+           // System.Threading.Thread.Sleep(10000);
             return Content("世界, 您好!!","text/html", System.Text.Encoding.UTF8);
         }
 
@@ -140,10 +140,6 @@ namespace MSIT158Site.Controllers
                     spots = searchDTO.sortType == "asc" ? spots.OrderBy(s => s.SpotId) :   spots.OrderByDescending(s => s.SpotId);
                     break;
             }
-
-
-
-
 
             //總共有多少筆資料
             int totalCount = spots.Count();

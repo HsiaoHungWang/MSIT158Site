@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "History";
+}
+
+<h1>History</h1>
+<input type="button" class="btn btn-primary" id="button1" value="第一代寫法" />
+<input type="button" class="btn btn-primary" id="button2" value="第二代寫法" />
+<input type="button" class="btn btn-primary" id="button3" value="現代寫法" />
+
+
+<div class="alert alert-primary mt-3 w-50" role="alert" id="alertDiv"></div>
+
+@section Scripts{
+    <script>
+        const btn1 = document.querySelector('#button1')
+        const btn2 = document.querySelector('#button2')
+        const btn3 = document.querySelector('#button3')
+        const divAlert = document.querySelector('#alertDiv')
+
+        btn1.addEventListener('click', function () {
+            //第一代寫法
+
+            var xhr = new XMLHttpRequest();
+
+            if (xhr != null) {
+               //readyState => 0 -> 1 -> 2 -> 3 -> 4
+                xhr.addEventListener("readystatechange", callback);
+                xhr.open('get', '/api/index');
+                xhr.send();
+            } else {
+                alert("您的瀏覽器不支援Ajax功能!!");
+            }
+
+            function callback() {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        var data = xhr.responseText;
+                        divAlert.innerHTML = `<h2>${data}</h2>`;
+                    } else {
+                        alert(xhr.status);
+                    }
+                }
+
+            }
+        })
+
+        btn2.addEventListener('click', function () {
+            //第二代寫法
+            const xhr = new XMLHttpRequest()
+            xhr.addEventListener("load", function () {
+                const data = xhr.responseText
+                divAlert.innerHTML = `<h2>${data}</h2>`;
+            })
+            xhr.open('GET', '/api/index')
+            xhr.send()
+        })
+
+        btn3.addEventListener('click', async function () {
+            //現代寫法
+            //fetch('/api/index?name=Tom&age=25')
+            //    .then(response => response.text())
+            //    .then(data => divAlert.innerHTML =  `<h2>${data}</h2>`;)
+
+         
+            const response = await fetch('/api/index');
+            const data = await response.text();
+            divAlert.innerHTML = `<h2>${data}</h2>`;
+
+        })
+    </script>
+}
