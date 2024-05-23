@@ -52,6 +52,10 @@ namespace MSIT158Site.Controllers
         {
             return View();
         }
+        public IActionResult AutoComplete()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
